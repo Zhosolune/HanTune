@@ -7,6 +7,9 @@ import { getEndlessStats } from '~/logic/endless'
 const toggleDark = useToggle(isDark)
 const toggleSettings = useToggle(showSettings)
 
+// 注入showWelcome函数
+const showWelcome = inject('showWelcome') as (() => void) | undefined
+
 function toggleDashboard() {
   if (currentMode.value === 'endless') {
     showEndlessDashboard.value = !showEndlessDashboard.value
@@ -42,6 +45,9 @@ const shouldShowDashboard = computed(() => {
     </div>
     <div flex items-center justify-between md:max-w-md ma py4 px2>
       <div flex items-center>
+        <button v-if="showWelcome" icon-btn mx2 @click="showWelcome()" title="查看项目信息">
+          <div i-carbon-information />
+        </button>
         <button icon-btn mx2 @click="openHelp()">
           <div i-carbon-help />
         </button>

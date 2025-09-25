@@ -63,15 +63,15 @@
   "input-placeholder": "输入四字词语...",
   "intro": {
     "welcome": "欢迎来到汉苑",
-    "description": "这是一个基于原创项目 antfu/handle 开发的汉字 Wordle 游戏。在保留原项目每日一词经典玩法的基础上，我们新增了无尽模式，让你可以无限挑战自己的成语知识！",
+    "description": "这是一个基于原创项目 antfu/handle 开发的汉字 Wordle 游戏。在保留原项目每日一词经典玩法的基础上，新增了无尽模式，让你可以无限挑战自己的成语知识！",
     "features-title": "游戏特色",
-    "feature-daily": "每日一词：经典模式，每天一个新成语挑战",
-    "feature-endless": "无尽模式：连续挑战，测试你的成语储备",
+    "feature-daily": "<span class=\"text-primary\">每日一词</span>：经典模式，每天一个新成语挑战",
+  "feature-endless": "<span class=\"text-primary\">无尽模式</span>：连续挑战，测试你的成语储备",
     "inspired-by": "游戏灵感来源于",
     "original-project": "原项目地址：",
     "created-by": "原作者：",
     "enter-game": "开始游戏",
-    "tip": "选择游戏模式开始你的汉字之旅"
+    "tip": "开始你的汉字之旅"
   },
   "intro-1": "你有十次的机会猜一个",
   "intro-10": "每个格子的",

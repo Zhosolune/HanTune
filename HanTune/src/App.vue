@@ -6,12 +6,12 @@ import { DAYS_PLAY_BACK } from '~/logic/constants'
 import { currentMode, GameMode, setGameMode } from '~/logic/mode'
 import GameModeSelector from '~/components/GameModeSelector.vue'
 import IntroPage from '~/components/IntroPage.vue'
+import Modal from '~/components/Modal.vue'
 
 const { height } = useWindowSize()
 
-// 首次访问状态管理
-const hasVisited = useStorage('hantune-has-visited', false)
-const showIntro = ref(!hasVisited.value)
+// 欢迎界面状态管理
+const showIntro = ref(true)
 
 watchEffect(() => {
   document.documentElement.style.setProperty('--vh', `${height.value / 100}px`)
@@ -22,22 +22,27 @@ const handleModeSelected = (mode: GameMode) => {
 }
 
 const handleIntroComplete = () => {
-  hasVisited.value = true
   showIntro.value = false
 }
+
+const showWelcome = () => {
+  showIntro.value = true
+}
+
+// 提供showWelcome函数给子组件使用
+provide('showWelcome', showWelcome)
 </script>
 
 <template>
   <main font-sans text="center gray-700 dark:gray-300" select-none :class="{ colorblind }">
     <!-- 欢迎页面 -->
-    <IntroPage 
-      v-if="showIntro" 
-      @intro-complete="handleIntroComplete" 
-    />
+    <Modal v-model="showIntro" direction="top" :mask="false" @update:model-value="handleIntroComplete">
+      <IntroPage @intro-complete="handleIntroComplete" />
+    </Modal>
     
     <!-- 模式选择界面 -->
     <GameModeSelector 
-      v-else-if="!currentMode" 
+      v-if="!currentMode && !showIntro" 
       @mode-selected="handleModeSelected" 
     />
     

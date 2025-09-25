@@ -64,7 +64,7 @@ const final = computed(() => ({ py: 'uo', zy: 'ㄨㄛ', sp: 'o' }[inputMode.valu
       <span tracking-1 pl1>{{ t('start') }}</span>
     </button>
     <div op50>
-      {{ t('update-tip') }}
+      每日模式下，新题目每日零时更新
     </div>
 
     <div h-1px w-10 border="b base" m4 />
@@ -78,13 +78,17 @@ const final = computed(() => ({ py: 'uo', zy: 'ㄨㄛ', sp: 'o' }[inputMode.valu
       {{ t('other-variants') }}
     </button>
     <div>
-      <span op40>inspired by </span><a href="https://www.powerlanguage.co.uk/wordle/" target="_blank" op50 hover:op80>Wordle</a>
+      <span op40>Fork by </span><a href="https://github.com/antfu/handle" target="_blank" op50 hover:op80>Handle（原项目地址）</a>
       <span op40>, made by </span>
       <a op50 hover:op80 href="https://twitter.com/antfu7" target="_blank">Anthony</a>
       <span op40> & </span>
       <a op50 hover:op80 href="https://twitter.com/iiiiiiines_____" target="_blank">Inès</a>
     </div>
-    <a href="https://github.com/antfu/handle" target="_blank" flex="~ center gap-1" op50 hover:op80>
+    <div>
+      <span op40>made by </span>
+      <a op50 hover:op80 href="https://github.com/Zhosolune" target="_blank">ZhoSolune</a>
+    </div>
+    <a href="https://github.com/Zhosolune/HanTune" target="_blank" flex="~ center gap-1" op50 hover:op80>
       <div i-carbon-logo-github />
       Source Code
     </a>
