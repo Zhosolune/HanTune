@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { t } from '~/i18n'
-
-const emit = defineEmits<{
-  'intro-complete': []
-}>()
+import { showIntro, showHelp } from '~/state'
+import { firstVisit, initialized } from '~/storage'
 
 /**
  * 进入应用主界面
  */
 function enterApp() {
-  emit('intro-complete')
+  showIntro.value = false
+  // 只有在首次访问时才显示WelcomePage
+  if (firstVisit.value) {
+    showHelp.value = true
+  }
 }
 
 /**
  * 关闭介绍页面
  */
 function closeIntro() {
-  emit('intro-complete')
+  showIntro.value = false
+  // 关闭时不自动显示WelcomePage，保持独立
 }
 </script>
 

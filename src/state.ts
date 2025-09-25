@@ -32,6 +32,7 @@ export const isDark = useDark()
 export const showHint = ref(false)
 export const showSettings = ref(false)
 export const showHelp = ref(false)
+export const showIntro = ref(false)
 export const showShare = ref(false)
 export const showFailed = ref(false)
 export const showEndlessFailed = ref(false) // 无尽模式失败遮罩

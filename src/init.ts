@@ -1,4 +1,4 @@
-import { initialized, markEnd, markStart, meta, pauseTimer } from './storage'
+import { initialized, markEnd, markStart, meta, pauseTimer, firstVisit } from './storage'
 import { answer, dayNo, daySince, isDev, dailyIsFinished, dailyIsPassed, showCheatSheet, showHelp } from './state'
 import { t } from './i18n'
 import { answers } from './answers/list'
@@ -7,7 +7,8 @@ import { tryFixAnswer } from './logic/answer-fix'
 
 useTitle(computed(() => `${t('name')} - ${t('description')}`))
 
-if (!initialized.value)
+// 只有在非首次访问且未初始化时才显示WelcomePage
+if (!initialized.value && !firstVisit.value)
   showHelp.value = true
 
 watchEffect(() => {

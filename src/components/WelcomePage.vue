@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { isDark, showHelp, showVariants, useMask } from '~/state'
-import { initialized, inputMode } from '~/storage'
+import { initialized, inputMode, firstVisit } from '~/storage'
 import { t } from '~/i18n'
 
 function start() {
   showHelp.value = false
   useMask.value = false
   initialized.value = true
+  firstVisit.value = false
 }
 
 function variantButton() {

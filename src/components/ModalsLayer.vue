@@ -8,6 +8,7 @@ import {
   showEndlessFailed,
   showHelp,
   showHint,
+  showIntro,
   showSettings,
   showShareDialog,
   showVariants,
@@ -17,6 +18,9 @@ const lg = breakpoints.lg
 </script>
 
 <template>
+  <Modal v-model="showIntro" direction="top" :mask="false">
+    <IntroPage />
+  </Modal>
   <Modal v-model="showCheatSheet" :direction="lg ? 'right' : 'top'" :mask="!lg">
     <CheatSheet />
   </Modal>

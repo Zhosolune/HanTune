@@ -7,6 +7,7 @@ export const legacyTries = useStorage<Record<number, string[]>>('handle-tries', 
 
 export const history = useStorage<Record<number, TriesMeta>>('handle-tries-meta', {})
 export const initialized = useStorage('handle-initialized', false)
+export const firstVisit = useStorage('handle-first-visit', true)
 
 export const inputMode = useStorage<InputMode>('handle-mode', preferZhuyin ? 'zy' : 'py')
 export const spMode = useStorage<SpMode>('handle-sp-mode', 'sougou')
