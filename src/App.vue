@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import '~/init'
-import { answer, dayNo, daySince, isDev } from '~/state'
-import { colorblind } from '~/storage'
+import { answer, dayNo, daySince, isDev, showHelp } from '~/state'
+import { colorblind, initialized } from '~/storage'
 import { DAYS_PLAY_BACK } from '~/logic/constants'
 import { currentMode, GameMode, setGameMode } from '~/logic/mode'
 import GameModeSelector from '~/components/GameModeSelector.vue'
@@ -10,8 +10,8 @@ import Modal from '~/components/Modal.vue'
 
 const { height } = useWindowSize()
 
-// 欢迎界面状态管理
-const showIntro = ref(true)
+// 欢迎界面状态管理 - 根据initialized状态决定是否显示IntroPage
+const showIntro = computed(() => !initialized.value)
 
 watchEffect(() => {
   document.documentElement.style.setProperty('--vh', `${height.value / 100}px`)
@@ -22,11 +22,13 @@ const handleModeSelected = (mode: GameMode) => {
 }
 
 const handleIntroComplete = () => {
-  showIntro.value = false
+  // IntroPage完成后，显示WelcomePage（规则介绍）
+  showHelp.value = true
 }
 
 const showWelcome = () => {
-  showIntro.value = true
+  // 重新显示IntroPage
+  initialized.value = false
 }
 
 // 提供showWelcome函数给子组件使用
@@ -35,19 +37,19 @@ provide('showWelcome', showWelcome)
 
 <template>
   <main font-sans text="center gray-700 dark:gray-300" select-none :class="{ colorblind }">
-    <!-- 欢迎页面 -->
+    <!-- 项目介绍页面 -->
     <Modal v-model="showIntro" direction="top" :mask="false" @update:model-value="handleIntroComplete">
       <IntroPage @intro-complete="handleIntroComplete" />
     </Modal>
     
     <!-- 模式选择界面 -->
     <GameModeSelector 
-      v-if="!currentMode && !showIntro" 
+      v-if="!currentMode && initialized" 
       @mode-selected="handleModeSelected" 
     />
     
     <!-- 游戏界面 -->
-    <template v-else>
+    <template v-else-if="initialized">
       <NotTodayBanner v-if="currentMode === 'daily' && dayNo < daySince" />
       <Navbar />
       <div p="4">
