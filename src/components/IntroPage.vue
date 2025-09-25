@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { isDark } from '~/state'
 import { t } from '~/i18n'
 
 const emit = defineEmits<{
