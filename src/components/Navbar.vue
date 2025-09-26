@@ -24,18 +24,12 @@ function openHelp() {
 }
 
 async function toggleGameMode() {
-  console.log('切换游戏模式 - 当前模式:', currentMode.value)
   const newMode = currentMode.value === 'daily' ? 'endless' : 'daily'
-  console.log('切换游戏模式 - 目标模式:', newMode)
   await setGameMode(newMode)
-  console.log('切换游戏模式 - 完成，新模式:', currentMode.value)
 }
 
 // 计算是否显示计分板按钮
 const shouldShowDashboard = computed(() => {
-  if (!currentMode.value) {
-    return false
-  }
   if (currentMode.value === 'endless') {
     return getEndlessStats().totalRounds > 0
   } else {

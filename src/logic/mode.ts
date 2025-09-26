@@ -21,18 +21,6 @@ export const modeState = useStorage<ModeState>('hantune-mode-state', {
   lastModeSwitch: 0
 })
 
-// 确保状态正确初始化
-if (!gameMode.value) {
-  gameMode.value = 'daily'
-}
-if (!modeState.value) {
-  modeState.value = {
-    currentMode: 'daily',
-    isTransitioning: false,
-    lastModeSwitch: 0
-  }
-}
-
 // 响应式计算属性
 export const isDailyMode = computed(() => gameMode.value === 'daily')
 export const isEndlessMode = computed(() => gameMode.value === 'endless')
@@ -43,21 +31,16 @@ export const isEndlessMode = computed(() => gameMode.value === 'endless')
  * @param force 是否强制切换（忽略过渡状态）
  */
 export async function switchGameMode(mode: GameMode, force = false) {
-  console.log('switchGameMode - 开始切换，当前模式:', gameMode.value, '目标模式:', mode, '强制:', force)
-  
   if (gameMode.value === mode && !force) {
-    console.log('switchGameMode - 相同模式，不切换')
     return
   }
 
   // 防止频繁切换（500ms内只能切换一次）
   const now = Date.now()
   if (!force && now - modeState.value.lastModeSwitch < 500) {
-    console.log('switchGameMode - 切换太频繁，跳过')
     return
   }
 
-  console.log('switchGameMode - 开始切换流程')
   // 设置过渡状态
   modeState.value.isTransitioning = true
   
@@ -86,7 +69,6 @@ export async function switchGameMode(mode: GameMode, force = false) {
   // 延迟清除过渡状态
   setTimeout(() => {
     modeState.value.isTransitioning = false
-    console.log('switchGameMode - 过渡状态清除，切换完成')
   }, 300)
 }
 
