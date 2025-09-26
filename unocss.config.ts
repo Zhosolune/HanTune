@@ -4,9 +4,7 @@ import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
 export default defineConfig({
   safelist: [
     // 动态绑定的图标类，防止被purge
-    'i-carbon-calendar',
-    'i-carbon-infinity',
-    'i-carbon-infinity-symbol', // infinity图标的实际名称
+    'i-carbon-switcher', // 模式切换图标
     'i-carbon-sun',
     'i-carbon-moon',
     'i-carbon-information',
