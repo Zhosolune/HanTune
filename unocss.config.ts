@@ -6,6 +6,7 @@ export default defineConfig({
     // 确保动态图标类不被清理
     'i-carbon-calendar',
     'i-carbon-infinity',
+    'i-carbon-infinite',
     'i-carbon-sun',
     'i-carbon-moon',
     'i-carbon-information',
