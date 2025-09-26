@@ -31,7 +31,7 @@ async function toggleGameMode() {
 // 计算是否显示计分板按钮
 const shouldShowDashboard = computed(() => {
   if (currentMode.value === 'endless') {
-    return getEndlessStats().totalRounds > 0
+    return true // 无尽模式始终显示计分板
   } else {
     return gamesCount.value > 0
   }

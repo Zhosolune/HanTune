@@ -1,11 +1,16 @@
 <template>
-  <div class="endless-dashboard">
-    <div class="dashboard-header">
-      <h3>{{ t('endless.dashboard.title') }}</h3>
-      <p class="dashboard-subtitle">{{ t('endless.dashboard.subtitle') }}</p>
+  <div p5 flex="~ col center" relative>
+    <div absolute top-4 right-4 flex="~ gap-3">
+      <button icon-btn @click="close">
+        <div i-carbon-close />
+      </button>
     </div>
+
+    <p text-xl font-serif mb2>
+      <b>{{ t('endless.dashboard.title') }}</b>
+    </p>
     
-    <div class="stats-grid">
+    <div flex="~ wrap gap-4" justify-center min-w-100px py2>
       <DashboardItem 
         :text="t('endless.dashboard.totalRounds')" 
         :value="stats.totalRounds.toString()" 
@@ -22,6 +27,9 @@
         :text="t('endless.dashboard.averageDuration')" 
         :value="stats.averageDuration" 
       />
+    </div>
+    
+    <div flex="~ wrap gap-4" justify-center min-w-100px py2>
       <DashboardItem 
         :text="t('endless.dashboard.bestStreak')" 
         :value="stats.bestStreak.toString()" 
@@ -32,20 +40,30 @@
       />
     </div>
 
-    <div class="session-info" v-if="currentSession">
-      <h4>{{ t('endless.dashboard.currentSession') }}</h4>
-      <div class="session-stats">
-        <span>{{ t('endless.dashboard.sessionRounds') }}: {{ currentSession.totalRounds }}</span>
-        <span>{{ t('endless.dashboard.sessionPassed') }}: {{ currentSession.passedRounds }}</span>
-        <span>{{ t('endless.dashboard.sessionStreak') }}: {{ currentSession.currentStreak }}</span>
+    <div class="session-info" v-if="currentSession && currentSession.isActive">
+      <h4 text-lg font-serif mb2 text-center>{{ t('endless.dashboard.currentSession') }}</h4>
+      <div flex="~ wrap gap-4" justify-center min-w-100px py2>
+        <DashboardItem 
+          :text="t('endless.dashboard.sessionRounds')" 
+          :value="currentSession.totalRounds.toString()" 
+        />
+        <DashboardItem 
+          :text="t('endless.dashboard.sessionPassed')" 
+          :value="currentSession.passedRounds.toString()" 
+        />
+        <DashboardItem 
+          :text="t('endless.dashboard.sessionStreak')" 
+          :value="currentSession.currentStreak.toString()" 
+        />
       </div>
     </div>
 
-    <div class="actions">
+    <div class="actions" pt4>
       <button 
         class="reset-btn" 
         @click="handleReset"
         :disabled="!canReset"
+        px4 py2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed
       >
         {{ t('endless.dashboard.resetStats') }}
       </button>
@@ -57,6 +75,7 @@
 import { computed } from 'vue'
 import DashboardItem from './DashboardItem.vue'
 import { t } from '~/i18n'
+import { showEndlessDashboard } from '~/state'
 import { 
   getEndlessDetailedStats, 
   currentEndlessSession, 
@@ -80,6 +99,13 @@ const currentSession = computed(() => currentEndlessSession.value)
 const canReset = computed(() => !isEndlessSessionActive.value)
 
 /**
+ * 关闭计分板
+ */
+function close() {
+  showEndlessDashboard.value = false
+}
+
+/**
  * 处理重置统计数据
  */
 function handleReset() {
@@ -90,90 +116,13 @@ function handleReset() {
 </script>
 
 <style scoped>
-.endless-dashboard {
-  padding: 1rem;
-  background: var(--color-bg-secondary);
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.dashboard-header h3 {
-  margin: 0 0 0.5rem 0;
-  color: var(--color-text-primary);
-  font-size: 1.25rem;
-}
-
-.dashboard-subtitle {
-  margin: 0;
-  color: var(--color-text-secondary);
-  font-size: 0.875rem;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
 .session-info {
-  background: var(--color-bg-primary);
-  padding: 1rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
-
-.session-info h4 {
-  margin: 0 0 0.75rem 0;
-  color: var(--color-text-primary);
-  font-size: 1rem;
-}
-
-.session-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem 0;
 }
 
 .actions {
   text-align: center;
-}
-
-.reset-btn {
-  background: var(--color-danger);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: opacity 0.2s;
-}
-
-.reset-btn:hover:not(:disabled) {
-  opacity: 0.8;
-}
-
-.reset-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@media (max-width: 640px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .session-stats {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
 }
 </style>
