@@ -57,7 +57,7 @@ const shouldShowDashboard = computed(() => {
       </div>
       <div flex items-center>
         <button icon-btn mx2 @click="toggleGameMode()" :title="currentMode === 'daily' ? '切换到无尽模式' : '切换到每日模式'">
-          <div :class="currentMode === 'daily' ? 'i-carbon-calendar' : 'i-carbon-infinite'" />
+          <div :class="currentMode === 'daily' ? 'i-carbon-calendar' : 'i-carbon-infinity'" />
         </button>
         <button icon-btn mx2 @click="toggleSettings()">
           <div i-carbon-settings />
