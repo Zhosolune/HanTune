@@ -2,6 +2,17 @@ import type { Theme } from '@unocss/preset-mini'
 import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
 
 export default defineConfig({
+  safelist: [
+    // 确保动态图标类不被清理
+    'i-carbon-calendar',
+    'i-carbon-infinity',
+    'i-carbon-sun',
+    'i-carbon-moon',
+    'i-carbon-information',
+    'i-carbon-help',
+    'i-carbon-catalog',
+    'i-carbon-settings',
+  ],
   shortcuts: [
     {
       'btn': 'px-4 py-1 rounded inline-block bg-primary text-white cursor-pointer tracking-wide op90 hover:op100 disabled:cursor-default disabled:bg-gray-600 disabled:!op50 disabled:pointer-events-none',
