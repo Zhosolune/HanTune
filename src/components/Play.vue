@@ -288,14 +288,14 @@ watch(isEndlessMode, async (newMode) => {
 
 <template>
   <div>
-    <div flex="~ col" pt4 items-center>
+    <div flex="~ col"  items-center>
       <!-- 无尽模式信息栏 -->
       <div v-if="isEndlessMode" class="endless-info" mb4>
         <div class="round-info">
-          <span class="round-label">第 {{ currentRound?.roundNumber || 1 }} 轮</span>
+          <span class="round-label">{{ t('endless.round-count', currentRound?.roundNumber || 1) }}</span>
           <span class="stats-info">
-            正确: {{ getEndlessStats().totalCorrect }} |
-            总计: {{ getEndlessStats().totalRounds }}
+            {{ t('endless.correct', getEndlessStats().totalCorrect) }} |
+            {{ t('endless.total-count', getEndlessStats().totalRounds) }}
           </span>
         </div>
       </div>

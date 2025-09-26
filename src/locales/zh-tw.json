@@ -12,6 +12,8 @@
   "dont-spoiler": "分享時建議開啟遮罩避免劇透",
   "download": "下載",
   "download-as-image": "保存為圖片",
+  "endless-mode": "無盡模式",
+  "daily-mode": "每日模式",
   "endless": {
     "dashboard": {
       "title": "無盡模式統計",
@@ -39,7 +41,10 @@
       "sessionStats": "會話統計",
       "passed": "通過",
       "streak": "連勝"
-    }
+    },
+    "correct": "正確：{0}",
+    "total-count": "总计：{0}",
+    "round-count": "第 {0} 轮"
   },
   "example-1": "班門弄斧",
   "example-2": "水落石出",
